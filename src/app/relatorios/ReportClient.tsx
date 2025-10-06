@@ -61,7 +61,7 @@ export function ReportClient() {
     const sortedReportData = Array.from(aggregatedData.entries()).map(([activityName, data]) => ({
       activityName,
       ...data,
-    })).sort((a,b) => b.totalPoints - a.totalPoints);
+    })).sort((a,b) => a.activityName.localeCompare(b.activityName));
 
     setReportData(sortedReportData);
     setPeriod(date);
