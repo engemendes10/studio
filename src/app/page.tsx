@@ -1,23 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import { useLocalStorage } from "@/lib/hooks/use-local-storage";
 import { UserData } from "@/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [userData] = useLocalStorage<UserData | null>("userData", null);
   const firstName = userData?.nomeCompleto?.split(" ")[0] || "";
 
   return (
-    <div className="flex flex-1 items-center justify-center p-4 sm:p-6 md:p-8">
+    <div className="flex flex-1 flex-col items-center justify-center p-4 sm:p-6 md:p-8">
       <Card className="w-full max-w-2xl">
         <CardContent className="p-6">
           <h1 className="text-3xl font-headline text-primary mb-6 text-center">
             Boas Vindas
           </h1>
           <p
-            className="text-center"
-            style={{ color: "#406b30", fontSize: "16px" }}
+            className="text-center text-foreground"
           >
             Olá {firstName}, seja bem vindo(a) ao Aplicativo ProdutiviNet. Nele
             você poderá controlar toda a sua produtividade fiscal e ter à mão
@@ -26,6 +27,9 @@ export default function Home() {
           </p>
         </CardContent>
       </Card>
+      <Button asChild className="mt-8">
+        <Link href="/lancamentos">Iniciar</Link>
+      </Button>
     </div>
   );
 }
