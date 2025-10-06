@@ -159,7 +159,7 @@ export function ReportClient() {
           x={0}
           y={0}
           dy={16}
-          textAnchor="end"
+          textAnchor="middle"
           fill="#666"
           transform="rotate(-90)"
           fontSize={10}
