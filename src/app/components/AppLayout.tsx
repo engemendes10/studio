@@ -48,6 +48,16 @@ function AppLogo() {
 function DesktopSidebar() {
   const pathname = usePathname();
   const { state } = useSidebar();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+  
   return (
     <Sidebar collapsible="icon" className="hidden border-r-0 md:flex">
       <SidebarHeader>
@@ -82,31 +92,16 @@ function DesktopSidebar() {
   );
 }
 
-function MobileHeader() {
-    const { toggleSidebar } = useSidebar();
-    return (
-        <header className="flex h-14 items-center gap-4 border-b bg-background px-4 md:hidden">
-            <Button variant="ghost" size="icon" onClick={toggleSidebar} >
-                <PanelLeft />
-                <span className="sr-only">Alternar barra lateral</span>
-            </Button>
-            <div className="flex-1">
-                <AppLogo />
-            </div>
-        </header>
-    )
-}
 
 function MobileBottomNav() {
   const pathname = usePathname();
-  const { isMobile } = useSidebar();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted || !isMobile) {
+  if (!mounted) {
     return null;
   }
 
@@ -133,22 +128,20 @@ function MobileBottomNav() {
 
 function AppLayoutContent({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
-    const { isMobile } = useSidebar();
     const [mounted, setMounted] = React.useState(false);
 
     React.useEffect(() => {
         setMounted(true);
     }, []);
 
-    // Add pb-16 for mobile view to account for the bottom nav
     const mainDivClass = cn(
-        "flex flex-col md:pl-[3rem]",
-        mounted && isMobile && "pb-16"
+        "flex flex-col",
+        mounted && "md:pl-[3rem] pb-16 md:pb-0"
     );
 
     return (
         <>
-            <DesktopSidebar />
+            {mounted && <DesktopSidebar />}
             <div className={mainDivClass}>
                 <header className="sticky top-0 z-10 hidden h-14 items-center gap-4 border-b bg-background px-4 md:flex">
                     <h1 className="flex-1 text-xl font-headline text-primary">

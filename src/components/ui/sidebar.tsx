@@ -183,35 +183,6 @@ const Sidebar = React.forwardRef<
       setMounted(true)
     }, [])
 
-    if (!mounted) {
-      return (
-        <div
-          ref={ref}
-          className={cn("hidden md:block", className)}
-          {...props}
-        >
-           <div className="h-svh w-[--sidebar-width-icon] p-2">
-            <Skeleton className="h-full w-full" />
-           </div>
-        </div>
-      )
-    }
-
-    if (collapsible === "none") {
-      return (
-        <div
-          className={cn(
-            "flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground",
-            className
-          )}
-          ref={ref}
-          {...props}
-        >
-          {children}
-        </div>
-      )
-    }
-
     if (isMobile) {
       return (
         <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
@@ -232,14 +203,40 @@ const Sidebar = React.forwardRef<
       )
     }
 
+    if (!mounted) {
+        return (
+            <div ref={ref} className={cn(className)} {...props}>
+               <div className="h-svh w-[--sidebar-width-icon] p-2">
+                <Skeleton className="h-full w-full" />
+               </div>
+            </div>
+        )
+    }
+
+    if (collapsible === "none") {
+      return (
+        <div
+          className={cn(
+            "flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground",
+            className
+          )}
+          ref={ref}
+          {...props}
+        >
+          {children}
+        </div>
+      )
+    }
+
     return (
       <div
         ref={ref}
-        className="group peer hidden text-sidebar-foreground md:block"
+        className={cn("group peer hidden text-sidebar-foreground md:block", className)}
         data-state={state}
         data-collapsible={state === "collapsed" ? collapsible : ""}
         data-variant={variant}
         data-side={side}
+        {...props}
       >
         {/* This is what handles the sidebar gap on desktop */}
         <div
@@ -261,10 +258,8 @@ const Sidebar = React.forwardRef<
             // Adjust the padding for floating and inset variants.
             variant === "floating" || variant === "inset"
               ? "p-2 group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
-              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
-            className
+              : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l"
           )}
-          {...props}
         >
           <div
             data-sidebar="sidebar"
