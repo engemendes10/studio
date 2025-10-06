@@ -7,7 +7,7 @@ import { ptBR } from 'date-fns/locale';
 import { Calendar as CalendarIcon, Download } from 'lucide-react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Cell, Text } from 'recharts';
 
 import { useLocalStorage } from '@/lib/hooks/use-local-storage';
 import { Inspection, UserData, defaultUserData, Activity } from '@/lib/types';
@@ -154,11 +154,17 @@ export function ReportClient() {
   const RotatedAxisTick = (props: any) => {
     const { x, y, payload } = props;
     return (
-      <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-90)">
-          {payload.value}
-        </text>
-      </g>
+      <Text
+        x={x}
+        y={y}
+        width={80}
+        angle={-90}
+        textAnchor="end"
+        verticalAnchor="middle"
+        fontSize={12}
+      >
+        {payload.value}
+      </Text>
     );
   };
 
@@ -259,7 +265,7 @@ export function ReportClient() {
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={reportData} margin={{ top: 5, right: 20, left: 10, bottom: 150 }}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="activityName" interval={0} tick={<RotatedAxisTick />} />
+                            <XAxis dataKey="activityName" interval={0} tick={<RotatedAxisTick />} height={100} />
                             <YAxis />
                             <Tooltip content={<CustomTooltip />} />
                             <Bar dataKey="totalPoints" name="Pontuação">
@@ -279,7 +285,7 @@ export function ReportClient() {
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={reportData} margin={{ top: 5, right: 20, left: 10, bottom: 150 }}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="activityName" interval={0} tick={<RotatedAxisTick />} />
+                            <XAxis dataKey="activityName" interval={0} tick={<RotatedAxisTick />} height={100} />
                             <YAxis />
                             <Tooltip content={<CustomTooltip />} />
                             <Bar dataKey="quantity" name="Quantidade">
