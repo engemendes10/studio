@@ -19,6 +19,7 @@ import { useLocalStorage } from "@/lib/hooks/use-local-storage";
 import { UserData, defaultUserData } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
 import { useEffect } from "react";
+import { Textarea } from "@/components/ui/textarea";
 
 const formSchema = z.object({
   nomeCompleto: z.string().min(2, { message: "Nome é obrigatório." }),
@@ -165,7 +166,7 @@ export default function MeusDadosPage() {
                     <FormItem>
                       <FormLabel>Endereço</FormLabel>
                       <FormControl>
-                        <Input placeholder="Seu endereço" {...field} />
+                        <Textarea placeholder="Seu endereço" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
