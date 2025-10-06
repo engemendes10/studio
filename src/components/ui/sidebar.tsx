@@ -177,21 +177,24 @@ const Sidebar = React.forwardRef<
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
-    const [mounted, setMounted] = React.useState(false);
+    const [mounted, setMounted] = React.useState(false)
 
     React.useEffect(() => {
-        setMounted(true);
-    }, []);
+      setMounted(true)
+    }, [])
 
     if (!mounted) {
-        return (
-            <div
-                ref={ref}
-                className={cn("hidden md:block text-sidebar-foreground", className)}
-                {...props}
-            >
-            </div>
-        )
+      return (
+        <div
+          ref={ref}
+          className={cn("hidden md:block", className)}
+          {...props}
+        >
+           <div className="h-svh w-[--sidebar-width-icon] p-2">
+            <Skeleton className="h-full w-full" />
+           </div>
+        </div>
+      )
     }
 
     if (collapsible === "none") {
@@ -232,7 +235,7 @@ const Sidebar = React.forwardRef<
     return (
       <div
         ref={ref}
-        className="group peer hidden md:block text-sidebar-foreground"
+        className="group peer hidden text-sidebar-foreground md:block"
         data-state={state}
         data-collapsible={state === "collapsed" ? collapsible : ""}
         data-variant={variant}
