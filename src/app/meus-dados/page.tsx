@@ -153,7 +153,7 @@ export default function MeusDadosPage() {
                     <FormItem>
                       <FormLabel>E-mail</FormLabel>
                       <FormControl>
-                        <Input placeholder="Seu e-mail" {...field} />
+                        <Textarea placeholder="Seu e-mail" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
