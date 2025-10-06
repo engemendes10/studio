@@ -160,8 +160,10 @@ export function ReportClient() {
         width={80}
         angle={-90}
         textAnchor="end"
-        verticalAnchor="middle"
-        fontSize={12}
+        verticalAnchor="start"
+        fontSize={10}
+        dx={-12}
+        dy={4}
       >
         {payload.value}
       </Text>
@@ -265,7 +267,7 @@ export function ReportClient() {
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={reportData} margin={{ top: 5, right: 20, left: 10, bottom: 150 }}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="activityName" interval={0} tick={<RotatedAxisTick />} height={100} />
+                            <XAxis dataKey="activityName" interval={0} tick={<RotatedAxisTick />} height={160} />
                             <YAxis />
                             <Tooltip content={<CustomTooltip />} />
                             <Bar dataKey="totalPoints" name="Pontuação">
@@ -285,7 +287,7 @@ export function ReportClient() {
                     <ResponsiveContainer width="100%" height={400}>
                         <BarChart data={reportData} margin={{ top: 5, right: 20, left: 10, bottom: 150 }}>
                             <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="activityName" interval={0} tick={<RotatedAxisTick />} height={100} />
+                            <XAxis dataKey="activityName" interval={0} tick={<RotatedAxisTick />} height={160} />
                             <YAxis />
                             <Tooltip content={<CustomTooltip />} />
                             <Bar dataKey="quantity" name="Quantidade">
