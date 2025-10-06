@@ -154,19 +154,19 @@ export function ReportClient() {
   const RotatedAxisTick = (props: any) => {
     const { x, y, payload } = props;
     return (
-      <Text
-        x={x}
-        y={y}
-        width={80}
-        angle={-90}
-        textAnchor="end"
-        verticalAnchor="start"
-        fontSize={10}
-        dx={-12}
-        dy={4}
-      >
-        {payload.value}
-      </Text>
+      <g transform={`translate(${x},${y})`}>
+        <text
+          x={0}
+          y={0}
+          dy={16}
+          textAnchor="end"
+          fill="#666"
+          transform="rotate(-90)"
+          fontSize={10}
+        >
+          {payload.value}
+        </text>
+      </g>
     );
   };
 
