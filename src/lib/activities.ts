@@ -1,0 +1,41 @@
+import type { Activity } from './types';
+
+export const ACTIVITIES: Activity[] = [
+  { name: 'Atendimento ao Cidadão I', points: 50 },
+  { name: 'Atendimento ao Cidadão II', points: 20 },
+  { name: 'Autos de Infração e Multa e Comunicado de Último Prazo', points: 20 },
+  { name: 'Comunicado Fiscal e Auto de Constatação', points: 5 },
+  { name: 'Digitalização de Autos, Intimações e Documentos', points: 10 },
+  { name: 'Elaboração de Relatórios e Editais', points: 5 },
+  { name: 'Embargo de Obras, Levantamento de Áreas e Interdição Administrativa', points: 30 },
+  { name: 'Exercício de Função Interna', points: 25 },
+  { name: 'Intimações e Notificações Administrativas', points: 10 },
+  { name: 'Lacração de Estabelecimentos', points: 30 },
+  { name: 'Média dos últimos 3 dias ou 3 meses', points: 1 },
+  { name: 'Medição Sonora', points: 30 },
+  { name: 'Pesquisa em Banco de Dados', points: 10 },
+  { name: 'Plantão da Defesa Civil', points: 10 },
+  { name: 'Plantão de Fiscalização Noturna', points: 10 },
+  { name: 'Vistoria', points: 10 },
+  { name: 'Vistorias Emergenciais e Procedimentos Especiais', points: 40 },
+];
+
+export const CHART_COLORS = [
+  '#FF6F61',
+  '#6B5B95',
+  '#88B04B',
+  '#F7CAC9',
+  '#186bf0',
+  '#955251',
+  '#B565A7',
+  '#6d6868',
+  '#DD4124',
+  '#EFC050',
+  '#bbe6fe',
+  '#9B2335',
+  '#DFCFBE',
+  '#E15D44',
+  '#a98319',
+  '#00A591',
+  '#6A2E35',
+];
