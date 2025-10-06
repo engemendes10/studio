@@ -1,3 +1,4 @@
+
 "use client";
 
 import Link from "next/link";
@@ -23,6 +24,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import React from "react";
 
 const navItems = [
   { href: "/", label: "Início", icon: Home },
@@ -97,6 +99,17 @@ function MobileHeader() {
 
 function MobileBottomNav() {
   const pathname = usePathname();
+  const { isMobile } = useSidebar();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !isMobile) {
+    return null;
+  }
+
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background md:hidden">
       <div className="grid h-16 grid-cols-5">
@@ -118,24 +131,44 @@ function MobileBottomNav() {
   );
 }
 
+function AppLayoutContent({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+    const { isMobile } = useSidebar();
+    const [mounted, setMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Add pb-16 for mobile view to account for the bottom nav
+    const mainDivClass = cn(
+        "flex flex-col md:pl-[3rem]",
+        mounted && isMobile && "pb-16"
+    );
+
+    return (
+        <>
+            <DesktopSidebar />
+            <div className={mainDivClass}>
+                <header className="sticky top-0 z-10 hidden h-14 items-center gap-4 border-b bg-background px-4 md:flex">
+                    <h1 className="flex-1 text-xl font-headline text-primary">
+                        {navItems.find(item => item.href === pathname)?.label}
+                    </h1>
+                </header>
+                <SidebarInset className="bg-muted/40">
+                    {children}
+                </SidebarInset>
+            </div>
+            <MobileBottomNav />
+        </>
+    )
+}
+
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-
   return (
     <SidebarProvider>
-      <DesktopSidebar />
-      <div className="flex flex-col md:pl-[3rem] pb-16 md:pb-0">
-        <header className="sticky top-0 z-10 hidden h-14 items-center gap-4 border-b bg-background px-4 md:flex">
-             <h1 className="flex-1 text-xl font-headline text-primary">
-              {navItems.find(item => item.href === pathname)?.label}
-            </h1>
-        </header>
-        <SidebarInset className="bg-muted/40">
-            {children}
-        </SidebarInset>
-      </div>
-      <MobileBottomNav />
+        <AppLayoutContent>{children}</AppLayoutContent>
     </SidebarProvider>
   );
 }

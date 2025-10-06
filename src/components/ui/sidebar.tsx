@@ -1,3 +1,4 @@
+
 "use client"
 
 import * as React from "react"
@@ -176,6 +177,22 @@ const Sidebar = React.forwardRef<
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
+    const [mounted, setMounted] = React.useState(false);
+
+    React.useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return (
+            <div
+                ref={ref}
+                className={cn("hidden md:block text-sidebar-foreground", className)}
+                {...props}
+            >
+            </div>
+        )
+    }
 
     if (collapsible === "none") {
       return (
