@@ -75,7 +75,7 @@ export default function MeusDadosPage() {
                     <FormItem>
                       <FormLabel>Nome Completo</FormLabel>
                       <FormControl>
-                        <Input placeholder="Seu nome completo" {...field} />
+                        <Textarea placeholder="Seu nome completo" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
