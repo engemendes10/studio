@@ -5,10 +5,19 @@ import { useLocalStorage } from "@/lib/hooks/use-local-storage";
 import { UserData } from "@/lib/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [userData] = useLocalStorage<UserData | null>("userData", null);
-  const firstName = userData?.nomeCompleto?.split(" ")[0] || "";
+  const [firstName, setFirstName] = useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    if (userData) {
+      setFirstName(userData?.nomeCompleto?.split(" ")[0] || "");
+    }
+  }, [userData]);
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center p-4 sm:p-6 md:p-8">
@@ -20,7 +29,7 @@ export default function Home() {
           <p
             className="text-center text-foreground"
           >
-            Olá {firstName}, seja bem vindo(a) ao Aplicativo ProdutiviNet. Nele
+            Olá{mounted && firstName ? ` ${firstName}` : ""}, seja bem vindo(a) ao Aplicativo ProdutiviNet. Nele
             você poderá controlar toda a sua produtividade fiscal e ter à mão
             todos os pontos conquistados durante o período que quiser. Use à
             vontade, ele foi desenvolvido especialmente para você!
