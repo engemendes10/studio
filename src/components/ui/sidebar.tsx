@@ -204,16 +204,6 @@ const Sidebar = React.forwardRef<
       )
     }
 
-    if (!mounted) {
-        return (
-            <div ref={ref} className={cn("hidden border-r-0 md:flex", className)} {...props}>
-               <div className="h-svh w-[--sidebar-width-icon] p-2">
-                <Skeleton className="h-full w-full" />
-               </div>
-            </div>
-        )
-    }
-
     if (collapsible === "none") {
       return (
         <div
@@ -224,9 +214,11 @@ const Sidebar = React.forwardRef<
           ref={ref}
           {...props}
         >
-          {children}
+          <div className={cn("flex h-full flex-col", !mounted && "hidden")}>
+            {children}
+          </div>
         </div>
-      )
+      );
     }
 
     return (
@@ -263,7 +255,9 @@ const Sidebar = React.forwardRef<
             data-sidebar="sidebar"
             className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
           >
-            {children}
+            <div className={cn("flex h-full flex-col", !mounted && "invisible")}>
+              {children}
+            </div>
           </div>
         </div>
       </div>
@@ -338,7 +332,7 @@ const SidebarInset = React.forwardRef<
         "relative flex min-h-svh flex-1 flex-col bg-background",
         "md:peer-data-[collapsible=icon]:peer-data-[state=collapsed]:pl-[--sidebar-width-icon]",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[state=expanded]:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl",
-        "md:peer-data-[state=expanded]:peer-data-[collapsible=offcanvas]:pl-[--sidebar-width]",
+        "md:peer-data-[state=expanded]:peer-data-[collapsible=offcanvas]:pl-0",
         className
       )}
       {...props}
