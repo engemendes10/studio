@@ -49,19 +49,6 @@ function AppLogo() {
 function DesktopSidebar() {
   const pathname = usePathname();
   const { state } = useSidebar();
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div className="hidden border-r-0 md:flex">
-        <div className="h-svh w-[--sidebar-width-icon] p-2"></div>
-      </div>
-    )
-  }
   
   return (
     <Sidebar collapsible="icon" className="hidden border-r-0 md:flex">
@@ -107,7 +94,7 @@ function MobileBottomNav() {
   }, []);
 
   if (!mounted) {
-    return null;
+    return <div className="fixed bottom-0 left-0 right-0 z-50 h-16 border-t bg-background md:hidden" />;
   }
 
   return (
@@ -133,21 +120,11 @@ function MobileBottomNav() {
 
 function AppLayoutContent({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
-    const [mounted, setMounted] = React.useState(false);
-
-    React.useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    const mainDivClass = cn(
-        "flex flex-col flex-1",
-        mounted && "pb-16 md:pb-0"
-    );
 
     return (
         <div className="flex w-full">
-            {mounted && <DesktopSidebar />}
-            <div className={mainDivClass}>
+            <DesktopSidebar />
+            <div className="flex flex-1 flex-col pb-16 md:pb-0">
                 <header className="sticky top-0 z-10 hidden h-14 items-center gap-4 border-b bg-background px-4 md:flex">
                     <h1 className="flex-1 text-xl font-headline text-primary">
                         {navItems.find(item => item.href === pathname)?.label}

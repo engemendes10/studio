@@ -206,7 +206,7 @@ const Sidebar = React.forwardRef<
 
     if (!mounted) {
         return (
-            <div ref={ref} className={cn(className)} {...props}>
+            <div ref={ref} className={cn("hidden border-r-0 md:flex", className)} {...props}>
                <div className="h-svh w-[--sidebar-width-icon] p-2">
                 <Skeleton className="h-full w-full" />
                </div>
@@ -338,6 +338,7 @@ const SidebarInset = React.forwardRef<
         "relative flex min-h-svh flex-1 flex-col bg-background",
         "md:peer-data-[collapsible=icon]:peer-data-[state=collapsed]:pl-[--sidebar-width-icon]",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[state=expanded]:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl",
+        "md:peer-data-[state=expanded]:peer-data-[collapsible=offcanvas]:pl-[--sidebar-width]",
         className
       )}
       {...props}
