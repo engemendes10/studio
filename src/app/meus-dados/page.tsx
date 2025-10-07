@@ -57,7 +57,7 @@ export default function MeusDadosPage() {
   }
 
   return (
-    <div className="container mx-auto p-4 sm:p-6 md:p-8">
+    <div className="p-4 md:container md:mx-auto md:p-6 lg:p-8">
       <Card>
         <CardHeader>
           <CardTitle className="font-headline text-primary">
