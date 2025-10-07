@@ -19,9 +19,13 @@ export function Toaster() {
     setMounted(true)
   }, [])
 
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <ToastProvider>
-      {mounted && toasts.map(function ({ id, title, description, action, ...props }) {
+      {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
           <Toast key={id} {...props}>
             <div className="grid gap-1">
