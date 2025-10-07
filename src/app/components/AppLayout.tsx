@@ -1,4 +1,5 @@
 
+
 "use client";
 
 import Link from "next/link";
@@ -55,7 +56,11 @@ function DesktopSidebar() {
   }, []);
 
   if (!mounted) {
-    return null;
+    return (
+      <div className="hidden border-r-0 md:flex">
+        <div className="h-svh w-[--sidebar-width-icon] p-2"></div>
+      </div>
+    )
   }
   
   return (
@@ -136,7 +141,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
 
     const mainDivClass = cn(
         "flex flex-col",
-        mounted && "md:pl-[3rem] pb-16 md:pb-0"
+        mounted && "pb-16 md:pb-0"
     );
 
     return (
