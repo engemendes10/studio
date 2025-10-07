@@ -140,12 +140,12 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
     }, []);
 
     const mainDivClass = cn(
-        "flex flex-col",
+        "flex flex-col flex-1",
         mounted && "pb-16 md:pb-0"
     );
 
     return (
-        <>
+        <div className="flex w-full">
             {mounted && <DesktopSidebar />}
             <div className={mainDivClass}>
                 <header className="sticky top-0 z-10 hidden h-14 items-center gap-4 border-b bg-background px-4 md:flex">
@@ -158,7 +158,7 @@ function AppLayoutContent({ children }: { children: React.ReactNode }) {
                 </SidebarInset>
             </div>
             <MobileBottomNav />
-        </>
+        </div>
     )
 }
 
