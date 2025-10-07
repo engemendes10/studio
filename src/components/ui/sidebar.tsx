@@ -178,12 +178,7 @@ const Sidebar = React.forwardRef<
     ref
   ) => {
     const { isMobile, state, openMobile, setOpenMobile } = useSidebar()
-    const [mounted, setMounted] = React.useState(false)
-
-    React.useEffect(() => {
-      setMounted(true)
-    }, [])
-
+    
     if (isMobile) {
       return (
         <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
@@ -214,9 +209,7 @@ const Sidebar = React.forwardRef<
           ref={ref}
           {...props}
         >
-          <div className={cn("flex h-full flex-col", !mounted && "hidden")}>
-            {children}
-          </div>
+          <div className="flex h-full flex-col">{children}</div>
         </div>
       );
     }
@@ -255,7 +248,7 @@ const Sidebar = React.forwardRef<
             data-sidebar="sidebar"
             className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:rounded-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
           >
-            <div className={cn("flex h-full flex-col", !mounted && "invisible")}>
+            <div className="flex h-full flex-col">
               {children}
             </div>
           </div>
