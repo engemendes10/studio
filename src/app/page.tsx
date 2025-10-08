@@ -27,7 +27,7 @@ export default function Home() {
             Boas Vindas
           </h1>
           <p
-            className="text-center text-foreground"
+            className="text-center text-foreground text-lg"
           >
             Olá{mounted && firstName ? ` ${firstName}` : ""}, seja bem vindo(a) ao Aplicativo ProdutiviNet. Nele
             você poderá controlar toda a sua produtividade fiscal e ter à mão
