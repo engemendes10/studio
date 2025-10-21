@@ -6,6 +6,7 @@ import { Toaster } from '@/components/ui/toaster';
 export const metadata: Metadata = {
   title: 'ProdutiviNet',
   description: 'Aplicativo de controle de produtividade fiscal.',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
